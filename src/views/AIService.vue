@@ -96,7 +96,7 @@ const sendMessage = async () => {
 .chat-box {
   border-radius: 10px;
   background-color: #ffffff;
-  height: 300px;
+  height: 650px;
   overflow-y: auto;
   padding: 15px;
   margin-bottom: 10px;

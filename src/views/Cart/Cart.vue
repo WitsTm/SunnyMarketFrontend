@@ -129,6 +129,9 @@ const checkOut = async () => {
     const response = await axios.post(
       `http://localhost:8080/orders/${userId}/createOrder`,
       {
+        Header:{
+          Authorization: `Bearer ${token}`,
+        },
         buyItemList: buyItemList,
       }
     );
