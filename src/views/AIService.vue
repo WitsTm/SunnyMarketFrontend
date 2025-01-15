@@ -77,7 +77,7 @@ const sendMessage = async () => {
   align-items: center;
   padding: 20px;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  min-height: calc(100vh - 200px);
+  min-height: 500px; 
 }
 
 .chat-title {
@@ -88,6 +88,7 @@ const sendMessage = async () => {
 }
 
 .chat-wrapper {
+  margin-top:30px;
   width: 100%;
   max-width: 800px;
 }
@@ -107,7 +108,8 @@ const sendMessage = async () => {
   margin-bottom: 10px;
   padding: 10px 15px;
   border-radius: 20px;
-  max-width: 50%;
+  width: fit-content;
+  max-width:50%;
   word-wrap: break-word;
 }
 
@@ -118,6 +120,7 @@ const sendMessage = async () => {
   text-align: right;
   margin-left: auto;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  min-width:auto;
 }
 
 .bot-message {
@@ -127,6 +130,7 @@ const sendMessage = async () => {
   text-align: left;
   margin-right: auto;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  min-width:auto;
 }
 
 .input-area {
