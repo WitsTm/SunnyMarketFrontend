@@ -50,7 +50,7 @@
     <!-- 商品列表 -->
     <div class="product-container">
       <div class="product-grid">
-        <div v-for="product in products" :key="product.id" class="product-card">
+        <div v-for="product in products" :key="product.productId" class="product-card">
           <router-link
             :to="`/products/${product.productId}`"
             class="product-link"
