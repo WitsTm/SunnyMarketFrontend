@@ -29,6 +29,7 @@
       </router-link>
     </div>
     <div class="btncontain" v-else-if="isAdmin">
+      <p class="welcome">歡迎 {{ email }}</p>
       <button class="btn" @click="logout">
         <p>登出</p>
       </button>
