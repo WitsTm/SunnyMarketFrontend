@@ -5,7 +5,6 @@
     <table v-if="loginRecordsPaginated.length > 0">
       <thead>
         <tr>
-          <th>Record Id</th>
           <th>Login Time</th>
           <th>IP 地址</th>
           <th>OS 名稱</th>
@@ -14,7 +13,6 @@
       </thead>
       <tbody>
         <tr v-for="record in loginRecordsPaginated" :key="record.recordId">
-          <td>{{ record.recordId }}</td>
           <td>{{ record.loginTime }}</td>
           <td>{{ record.ipAddress }}</td>
           <td>{{ record.osName }}</td>
