@@ -254,6 +254,13 @@ const handleSearch = () => {
   margin-top: 20px;
 }
 
+.paginationText {
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .paginationButton {
   padding: 8px 12px;
   margin: 0px 12px 0px 12px;
