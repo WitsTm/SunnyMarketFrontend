@@ -14,12 +14,12 @@
     <!-- USER_ADMIN：切換「登入」和「登出、後台管理」按鈕 
          ROLE_ADMIN：切換「登入」和「登出、會員中心」按鈕 
     -->
-    <div class="btncontain" v-if="!isLoggedIn">
+    <div v-if="!isLoggedIn" class="btncontain" >
       <router-link to="/user/login">
         <button class="btn">登入 | 註冊</button>
       </router-link>
     </div>
-    <div class="btncontain" v-else-if="isUser">
+    <div v-else-if="isUser" class="btncontain" >
       <p class="welcome">歡迎 {{ email }}</p>
       <button class="btn" @click="logout">
         <p>登出</p>
