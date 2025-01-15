@@ -123,7 +123,6 @@ const openAddModal = () => {
     price: 0,
     stock: 0,
   }; // 初始化表單
-  isEditModalVisible.value = true;
   isAddModalVisible.value = true;
 };
 
