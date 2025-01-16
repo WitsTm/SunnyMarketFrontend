@@ -33,7 +33,6 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
 import TokenStore from "@/utils/TokenStore";
 
 const loginRecords = ref([]);
@@ -50,7 +49,7 @@ onMounted(async () => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:8080/api/user/loginRecord/${userId}`, {
+    const response = await api.get(`/api/user/loginRecord/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}` // 將 token 添加到 Authorization header
       }

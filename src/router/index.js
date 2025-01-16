@@ -21,6 +21,7 @@ import Cart from "@/views/Cart/Cart.vue";
 // 導入 TokenStore，限制User和Admin的可見路由
 import TokenStore from "@/utils/TokenStore";
 import ResetPassword from "@/views/ResetPassword.vue";
+import ForgotPassword from "@/views/ForgotPassword.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL), // 定義路由歷史模式
@@ -71,6 +72,11 @@ const router = createRouter({
       name: "ResetPassword",
       component: ResetPassword,
       props: true, // 將路由參數作為 props 傳遞給組件
+    },
+    {
+      path: "/ForgotPassword",
+      name: "ForgotPassword",
+      component: ForgotPassword,
     },
 
     // 會員中心路由
