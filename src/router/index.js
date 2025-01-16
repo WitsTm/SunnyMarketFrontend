@@ -68,7 +68,7 @@ const router = createRouter({
 
     //忘記密碼
     {
-      path: "/ResetPassword?:token",
+      path: "/ResetPassword/:token",
       name: "ResetPassword",
       component: ResetPassword,
       props: true, // 將路由參數作為 props 傳遞給組件
