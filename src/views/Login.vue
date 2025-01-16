@@ -29,7 +29,11 @@
             required
           />
         </div>
-        <div class="forgotpassword">忘記密碼？</div>
+        <div class="forgotpassword">
+          <router-link to="/ForgotPassword" class="forgotpassword">
+            忘記密碼？
+          </router-link>
+        </div>
         <div class="form-actions">
           <button type="submit">登入</button>
         </div>
