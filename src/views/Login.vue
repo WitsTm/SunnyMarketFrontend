@@ -102,11 +102,7 @@ const getLogin = async () => {
 const googleLogin = async () => {
   try {
     const response = await api.get("/google/buildAuthUrl");
-    if (response) {
-      window.location.href = response.data.authUrl;
-    } else {
-      message.value = "Google 登入失敗，請再試一次";
-    }
+    window.location.href = response.data.authUrl;
   } catch (error) {
     console.error("Google 登入失敗：", error);
     message.value = "Google 登入失敗，請稍後再試";
@@ -126,12 +122,11 @@ const handleGoogleRedirect = async () => {
         "/google/getGoogleCode",
         googleLoginRequest
       );
-      console.log("Google 用戶資訊：", response.data);
       TokenStore.setToken(response.data.token);
       localStorage.setItem("role", response.data.role);
       setTimeout(() => {
         router.push("/");
-      }, 3000);
+      }, 500);
     } catch (error) {
       console.error("發送 code 到後端失敗：", error);
       message.value = "處理登入資訊失敗，請稍後再試";
