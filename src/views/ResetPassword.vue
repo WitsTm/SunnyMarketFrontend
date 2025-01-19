@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>重新設定密碼</h1>
+    <h1 class="title">重新設定密碼</h1>
     <form
       id="reset-password-form"
       class="reset-pwd-container"
@@ -62,6 +62,11 @@ const resetPassword = async () => {
   border-radius: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title{
+  display: flex;
+  justify-content: center;
 }
 
 /* 輸入框樣式 */

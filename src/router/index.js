@@ -66,13 +66,14 @@ const router = createRouter({
       component: Cart,
     },
 
-    //忘記密碼
+    //忘記密碼路由
     {
       path: "/ResetPassword/:token",
       name: "ResetPassword",
       component: ResetPassword,
       props: true, // 將路由參數作為 props 傳遞給組件
     },
+
     {
       path: "/ForgotPassword",
       name: "ForgotPassword",
