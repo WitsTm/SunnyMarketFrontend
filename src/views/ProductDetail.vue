@@ -25,8 +25,9 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import Header from "@/components/Header.vue"; // 引入 Header 元件
 import Footer from "@/components/Footer.vue"; // 引入 Footer 元件
 import TopButton from "@/components/TopButton.vue"; // 引入 TopButton 元件
@@ -35,12 +36,15 @@ import { useCartStore } from "@/stores/cartStore"; // 引入Store
 
 const product = ref({}); // 商品列表
 
-// 路由
+// 獲取並解析路由的參數
 const route = useRoute();
 const productId = route.params.productId;
 
+// 獲取並解析路由的參數
+const router = useRouter();
+
 //加入購物車
-const cartStore = useCartStore(); 
+const cartStore = useCartStore();
 
 const addToCart = (product) => {
   console.log("點擊加入購物車，傳入的商品:", product);
@@ -48,27 +52,48 @@ const addToCart = (product) => {
   cartStore.addItem(product); // 這裡會呼叫 cartStore 的 addItem
 };
 
-// 定義方法來獲取商品資料
-const getProductDetails = async (productId) => {
-  try {
-    const response = await fetch(
-      `http://localhost:8080/api/products/${productId}`
-    );
-    if (response.ok) {
-      const data = await response.json();
-      product.value = data;
-    } else {
-      console.error("商品未找到");
-    }
-  } catch (error) {
-    console.error("錯誤: 無法獲取商品資料", error);
-  }
+const fetchProductDetail = (productId) => {
+  axios
+    .get(`http://localhost:8080/api/products/${productId}`) // 字符串插值
+    .then((response) => {
+      if (response.data) {
+        product.value = response.data; // 假設返回的資料在 response.data 中
+      } else {
+        router.push("/");
+        alert("查無此筆商品，點擊確定返回線上商城頁面");
+      }
+    })
+    .catch((error) => {
+      console.error("無法獲取商品資料:", error);
+      router.push("/");
+      alert("無法獲取商品資料，點擊確定返回線上商城頁面");      
+    });
 };
 
 // 在組件掛載時發送請求
 onMounted(() => {
-  getProductDetails(productId);
+  fetchProductDetail(productId);
 });
+
+// 原本用fetch打後端api
+// fetch是 javascript原生的寫法，相較axios.get更多手動設置部分
+//  1. 需要手動把response轉成json ( response.json() )
+//  2. HTTP 錯誤（如 404、500）仍會返回response物件，fetch會認為這是成功的，因此要手動檢查 response.ok
+//  3. 跨域請求需要額外配置
+// const getProductDetails = async (productId) => {
+//   try {
+//     const response = await fetch(
+//       `http://localhost:8080/api/products/${productId}`
+//     );
+//     if (response.ok) {
+//       const data = await response.json();
+//       product.value = data;
+//     } else {
+//       console.error("商品未找到");
+//     }
+//   } catch (error) {
+//     console.error("錯誤: 無法獲取商品資料", error);
+//   }
 </script>
 
 <style scoped>
@@ -103,8 +128,8 @@ onMounted(() => {
 .content {
   display: flex;
   flex-direction: column;
-  width: 400px;/* 圖片寬度 */
-  height: 400px;/* 圖片高度 */
+  width: 400px; /* 圖片寬度 */
+  height: 400px; /* 圖片高度 */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   /* 增加陰影 */
   padding: 40px;
@@ -127,7 +152,7 @@ onMounted(() => {
   font-size: 1em;
 }
 
-h2{
+h2 {
   margin: 0;
 }
 
