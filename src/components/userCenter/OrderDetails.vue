@@ -4,28 +4,55 @@
 <template>
   <div class="container">
     <div class="tableContainer">
-      <div class="title">訂單明細查詢</div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>會員編號</th>
-            <th>訂單編號</th>
-            <th>建立日期</th>
-            <th>總金額</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="order in orders" :key="order.orderId">
-            <td>{{ order.userId  }}</td>
-            <td>{{ order.orderId  }}</td>
-            <td>{{ order.createdDate  }}</td>
-            <td>{{ order.totalAmount  }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="title">訂單與明細查詢</div>
+      <div v-for="order in orders" :key="'order-' + order.orderId" class="order-block">
+        <!-- 訂單主要信息 -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>會員編號</th>
+              <th>訂單編號</th>
+              <th>建立日期</th>
+              <th>總金額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ order.userId }}</td>
+              <td>{{ order.orderId }}</td>
+              <td>{{ order.createdDate }}</td>
+              <td>{{ order.totalAmount }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 該訂單的明細 -->
+        <div class="details-section">
+          <table class="detailsTable">
+            <thead>
+              <tr>
+                <th>商品編號</th>
+                <th>商品名稱</th>
+                <th>數量</th>
+                <th>金額</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in order.orderItemList" :key="'item-' + item.orderItemId">
+                <td>{{ item.productId }}</td>
+                <td>{{ item.productName }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="order-separator"></div>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue';
