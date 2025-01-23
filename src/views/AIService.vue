@@ -46,6 +46,7 @@ const isLoggedIn = !!token;
 
 // 定義發送訊息的函式
 const sendMessage = async () => {
+  //使用者不可輸入空值
   if (userAsk.value.trim() === "") return;
 
   // 先顯示用戶輸入的訊息
@@ -58,10 +59,7 @@ const sendMessage = async () => {
     const response = await axios.post(`/api/openAi/${userId}/chet`, {
       userAsk: currentUserAsk,
     });
-    console.log(currentUserAsk);
-    console.log(response);
-
-    // 顯示伺服器回應的訊息
+    // 顯示AI回應的訊息
     messages.value.push({ text: response.data.aiRespond, isUser: false });
   } catch (error) {
     console.error("發送訊息失敗", error);
@@ -96,7 +94,7 @@ const sendMessage = async () => {
 .chat-box {
   border-radius: 10px;
   background-color: #ffffff;
-  height: 300px;
+  height: 650px;
   overflow-y: auto;
   padding: 15px;
   margin-bottom: 10px;

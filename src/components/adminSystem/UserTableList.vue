@@ -103,6 +103,7 @@ const displayUsers = computed(() => {
 <style scoped>
 .container {
   margin: 20px auto;
+  height: 100vh;
 }
 
 .tableContainer {
@@ -195,6 +196,13 @@ const displayUsers = computed(() => {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+}
+
+.paginationText {
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .paginationButton {

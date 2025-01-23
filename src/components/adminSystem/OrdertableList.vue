@@ -129,29 +129,58 @@ const displayOrders = computed(() => {
 <style scoped>
 .container {
   margin: 20px auto;
+  height: 100vh;
 }
 
+.titlecontainer {
+  display: flex;
+  justify-content: center;
+}
+
+.addbtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 10px;
+  background-color: lightgray;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addbtn:hover {
+  background-color: orange;
+}
+
+
 .tableContainer {
-  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .table {
-  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   width: 800px;
   border-collapse: collapse;
   text-align: center;
-  border: 2px solid darkgray;
+  border: darkgray solid 2px;
 }
 
 .table th,
 .table td {
-  border: 2px solid darkgray;
+  vertical-align: middle;
+  border: darkgray solid 2px;
+  background-color: white;
   padding: 4px;
   height: 44px;
 }
 
 .table thead th {
-  background: lightgray;
+  background-color: lightgray;
   font-weight: bold;
 }
 
@@ -162,7 +191,7 @@ const displayOrders = computed(() => {
 }
 
 .btn {
-  padding: 10px;
+  padding: 4px;
   margin: 0 4px 0 4px;
   background-color: lightgray;
   border-radius: 8px;
@@ -184,23 +213,32 @@ const displayOrders = computed(() => {
   margin-top: 20px;
 }
 
+.paginationText {
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .paginationButton {
   padding: 8px 12px;
   margin: 0px 12px 0px 12px;
   cursor: pointer;
-
+  background-color: lightgray;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  background-color: lightgray;
   border: none;
 }
 
 .paginationButton:hover {
-  background-color: orange;
+  background-color: rgb(255, 165, 0, 0.7);
 }
 
 .title {
-  margin-bottom: 20px;
+  position: relative;
+  bottom: 32px;
+  display: flex;
+  justify-content: center;
   font-size: 24px;
   font-weight: bold;
 }
@@ -220,14 +258,23 @@ const displayOrders = computed(() => {
   font-size: 14px;
 }
 
-.role {
+.productName {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category {
   min-width: 80px;
 }
 
-.status {
-  max-width: 56px;
-  width: 56px;
-  min-width: 52px;
+.price {
+  min-width: 80px;
+}
+
+.stock {
+  min-width: 80px;
 }
 
 .function {
@@ -235,18 +282,67 @@ const displayOrders = computed(() => {
 }
 
 @media screen and (max-width: 1200px) {
+  .function {
+    min-width: 120px;
+  }
+
+  .stock {
+    min-width: 80px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .productName {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 100px auto;
+    height: auto;
+  }
+
+  .table {
+    width: 325px;
+  }
+
+  .table th,
+  .table td {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .category {
+    width: 60px;
+    min-width: 60px;
+  }
+
+  .model {
+    width: 60px;
+    min-width: 60px;
+  }
+
+  .price {
+    max-width: 60px;
+    width: 60px;
+    min-width: 60px;
+  }
+
+  .stock {
+    max-width: 60px;
+    width: 60px;
+    min-width: 60px;
+  }
 
   .function {
     min-width: 90px;
   }
 
   .paginationButton {
-    padding: 8px 12px;
+    padding: 4px 8px;
     margin: 0px 8px 0px 8px;
     font-size: 12px;
-    cursor: pointer;
-    background-color: lightgray;
-    border: none;
   }
 
   .paginationText {
@@ -256,6 +352,5 @@ const displayOrders = computed(() => {
   .tableContainer {
     margin-top: 0;
   }
-
 }
 </style>

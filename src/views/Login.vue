@@ -29,7 +29,11 @@
             required
           />
         </div>
-        <div class="forgotpassword">忘記密碼？</div>
+        <div class="forgotpassword">
+          <router-link to="/ForgotPassword" class="forgotpassword">
+            忘記密碼？
+          </router-link>
+        </div>
         <div class="form-actions">
           <button type="submit">登入</button>
         </div>
@@ -59,7 +63,6 @@ import api from "@/utils/Request.js";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
-
 const message = ref("");
 
 const loginFrom = ref({
@@ -71,34 +74,35 @@ const tokenStore = useTokenStore();
 const router = useRouter();
 
 const getLogin = async () => {
-  const response = await api.post("/api/user/login", loginFrom.value);
-  if (response.data) {
-    console.log("這是 response.data：", response.data);
-    // 提取訊息和 Token
-    message.value = response.data.message;
-    localStorage.setItem("role" , response.data.role);
-    tokenStore.token = response.data.token;
-    console.log("獲取的 token：", tokenStore.token);
+  try {
+    const response = await api.post("/api/user/login", loginFrom.value);
+    if (response.data) {
+      console.log("這是 response.data：", response.data);
+      // 提取訊息和 Token
+      message.value = response.data.message;
+      localStorage.setItem("role", response.data.role);
+      tokenStore.token = response.data.token;
+      console.log("獲取的 token：", tokenStore.token);
 
-    //設置 token 在 TokenStore
-    TokenStore.setToken(response.data.token);
-    console.log("TokenStore 獲取的 token：", TokenStore.getToken());
+      //設置 token 在 TokenStore
+      TokenStore.setToken(response.data.token);
+      console.log("TokenStore 獲取的 token：", TokenStore.getToken());
 
-    // 延遲 0.5 秒後跳轉首頁
-    setTimeout(() => {
-      router.push("/");
-    }, 500);
+      // 延遲 3 秒後跳轉首頁
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    }
+  } catch (error) {
+    console.error("登入失敗：", error);
+    message.value = "登入失敗，請重新再試。";
   }
 };
 
 const googleLogin = async () => {
   try {
     const response = await api.get("/google/buildAuthUrl");
-    if (response) {
-      window.location.href = response.data.authUrl;
-    } else {
-      message.value = "Google 登入失敗，請再試一次";
-    }
+    window.location.href = response.data.authUrl;
   } catch (error) {
     console.error("Google 登入失敗：", error);
     message.value = "Google 登入失敗，請稍後再試";
@@ -118,12 +122,11 @@ const handleGoogleRedirect = async () => {
         "/google/getGoogleCode",
         googleLoginRequest
       );
-      console.log("Google 用戶資訊：", response.data);
       TokenStore.setToken(response.data.token);
-      localStorage.setItem("role", response.data.role)
+      localStorage.setItem("role", response.data.role);
       setTimeout(() => {
-      router.push("/");
-    }, 500);
+        router.push("/");
+      }, 500);
     } catch (error) {
       console.error("發送 code 到後端失敗：", error);
       message.value = "處理登入資訊失敗，請稍後再試";
@@ -228,7 +231,6 @@ onMounted(() => {
 .register-button:hover {
   background-color: gray;
 }
-
 
 .form-actions button[type="submit"] {
   background-color: black;

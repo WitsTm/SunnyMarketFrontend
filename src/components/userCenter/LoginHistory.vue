@@ -5,7 +5,6 @@
     <table v-if="loginRecordsPaginated.length > 0">
       <thead>
         <tr>
-          <th>Record Id</th>
           <th>Login Time</th>
           <th>IP 地址</th>
           <th>OS 名稱</th>
@@ -14,7 +13,6 @@
       </thead>
       <tbody>
         <tr v-for="record in loginRecordsPaginated" :key="record.recordId">
-          <td>{{ record.recordId }}</td>
           <td>{{ record.loginTime }}</td>
           <td>{{ record.ipAddress }}</td>
           <td>{{ record.osName }}</td>
@@ -35,7 +33,6 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
 import TokenStore from "@/utils/TokenStore";
 
 const loginRecords = ref([]);
@@ -52,7 +49,7 @@ onMounted(async () => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:8080/api/user/loginRecord/${userId}`, {
+    const response = await api.get(`/api/user/loginRecord/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}` // 將 token 添加到 Authorization header
       }

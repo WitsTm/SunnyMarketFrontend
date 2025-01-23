@@ -123,7 +123,6 @@ const openAddModal = () => {
     price: 0,
     stock: 0,
   }; // 初始化表單
-  isEditModalVisible.value = true;
   isAddModalVisible.value = true;
 };
 
@@ -252,6 +251,13 @@ const handleSearch = () => {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+}
+
+.paginationText {
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .paginationButton {
